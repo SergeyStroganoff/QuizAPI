@@ -1,9 +1,6 @@
 package com.stroganov.quizapi.models.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,12 +13,13 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "qustion_type")
+@Table(name = ("qustion_type"))
 public class QuestionType implements Serializable {
 
     @Id
     @Column(name = "type_id", nullable = false)
-    private Long type_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long typeId;
 
     @Column(name = "string")
     private String string;

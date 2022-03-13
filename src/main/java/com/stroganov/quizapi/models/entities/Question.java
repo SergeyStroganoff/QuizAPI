@@ -1,6 +1,6 @@
 package com.stroganov.quizapi.models.entities;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,18 +13,22 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "question")
+@Table(name = ("question"))
 public class Question implements Serializable {
+
+    @Id
+    @Column(name = "id", nullable = false, insertable=false,updatable=false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "type_id")
     QuestionType type;
+
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "quiz_id")
     Quiz quiz;
-    @Id
-    @Column(name = "id", nullable = false)
-    private Long id;
+
     @Column(name = "text")
     private String text;
 
