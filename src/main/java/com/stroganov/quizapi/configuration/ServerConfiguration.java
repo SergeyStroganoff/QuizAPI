@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan
+@ComponentScan(basePackages = {"com.stroganov.quizapi"})
 public class ServerConfiguration {
     @Bean
     public ModelMapper modelMapper() {
