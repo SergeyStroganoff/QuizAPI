@@ -13,7 +13,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class AnswerDto implements Serializable {
 
-    UserDto user;
+    private UserDto user;
 
     private QuestionDto question;
 }

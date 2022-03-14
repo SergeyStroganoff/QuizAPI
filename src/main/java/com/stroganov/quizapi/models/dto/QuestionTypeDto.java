@@ -14,7 +14,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 
 public class QuestionTypeDto implements Serializable {
-
     @Column(name = "string")
     private String string;
 }

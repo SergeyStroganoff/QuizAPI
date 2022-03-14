@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
@@ -32,8 +34,14 @@ public class QuizController {
 
     @DeleteMapping("/quiz/{id}")
     //@JWTTokenNeeded
-    public ResponseEntity<String> deleteQuiz( @PathVariable Long id) throws QuizServiceException {
+    public ResponseEntity<String> deleteQuiz(@PathVariable Long id) throws QuizServiceException {
         quizService.delete(id);
         return ResponseEntity.ok("Quiz deleted");
+    }
+
+    @GetMapping("/quiz/{status}")
+    //@JWTTokenNeeded
+    public List<QuizDto> findQuizByStatus(@PathVariable boolean status) throws QuizServiceException {
+        return quizService.findQuizByStatus(status);
     }
 }

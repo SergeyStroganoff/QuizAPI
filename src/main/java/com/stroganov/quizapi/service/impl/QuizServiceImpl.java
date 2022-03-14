@@ -8,10 +8,12 @@ import com.stroganov.quizapi.service.QuizService;
 import lombok.RequiredArgsConstructor;
 import org.apache.log4j.Logger;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -67,4 +69,17 @@ public class QuizServiceImpl implements QuizService {
             throw new QuizServiceException(e.getMessage());
         }
     }
+
+    @Override
+    public List<QuizDto> findQuizByStatus(boolean status) throws QuizServiceException {
+        try {
+            List<Quiz> quizList = quizRepository.findQuizByStatus(status);
+            return modelMapper.map(quizList, new TypeToken<List<QuizDto>>() {
+            }.getType());
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new QuizServiceException(e.getMessage());
+        }
+    }
+
 }

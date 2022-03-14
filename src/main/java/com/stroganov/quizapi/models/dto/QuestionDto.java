@@ -15,9 +15,9 @@ import java.io.Serializable;
 public class QuestionDto implements Serializable {
 
 
-    QuestionTypeDto type;
+    private QuestionTypeDto type;
 
-    QuizDto quiz;
+    private QuizDto quiz;
 
     private String text;
 

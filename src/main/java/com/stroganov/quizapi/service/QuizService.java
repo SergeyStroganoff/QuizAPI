@@ -4,6 +4,8 @@ import com.stroganov.quizapi.exceptions.QuizServiceException;
 import com.stroganov.quizapi.models.dto.QuizDto;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface QuizService {
     void save(QuizDto quizDto) throws QuizServiceException;
@@ -12,4 +14,5 @@ public interface QuizService {
 
     void delete(Long quizId) throws QuizServiceException;
 
+    List<QuizDto> findQuizByStatus(boolean status) throws QuizServiceException;
 }
