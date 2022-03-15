@@ -1,9 +1,6 @@
 package com.stroganov.quizapi.models.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,7 +10,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = ("answer"))
+@Table(name = "answer")
 public class Answer implements Serializable {
 
     @Id
@@ -28,5 +25,8 @@ public class Answer implements Serializable {
     @OneToOne
     @JoinColumn(name = "question_id")
     private Question question;
+
+    @JoinColumn(name = "value")
+    private  String answerValue;
 
 }
