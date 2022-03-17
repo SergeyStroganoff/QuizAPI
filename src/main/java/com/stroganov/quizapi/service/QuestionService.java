@@ -17,4 +17,5 @@ public interface QuestionService {
 
     List<QuestionDto> findAllQuestionByQuiz(Long quizId) throws QuestionServiceException;
 
+    QuestionDto findQuestion(Long id) throws QuestionServiceException;
 }

@@ -17,15 +17,13 @@ public class QuestionTypeController {
     private QuestionTypeService questionTypeService;
 
     @PostMapping("/quiztype")
-    //@JWTTokenNeeded
     public ResponseEntity<String> addQuestionType(@RequestBody QuestionTypeDto questionTypeDto) throws QuestionTypeServiceException {
         questionTypeService.save(questionTypeDto);
         return ResponseEntity.ok("questionType saved");
     }
 
     @DeleteMapping("/quiztype/{id}")
-    //@JWTTokenNeeded
-    public ResponseEntity<String> addQuestionType(@PathVariable Long id) throws QuestionTypeServiceException {
+    public ResponseEntity<String> deleteQuestionType(@PathVariable Long id) throws QuestionTypeServiceException {
         questionTypeService.delete(id);
         return ResponseEntity.ok("questionType deleted");
     }

@@ -7,6 +7,7 @@ import com.stroganov.quizapi.repository.AnswerRepository;
 import com.stroganov.quizapi.service.AnswerService;
 import org.apache.log4j.Logger;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,15 +45,19 @@ public class AnswerServiceImpl implements AnswerService {
         if (answer != null) {
             answerRepository.delete(answer);
         } else {
+            logger.debug(ANSWER_WAS_NOT_FOUND + " " + answerId);
             throw new AnswerServiceException(ANSWER_WAS_NOT_FOUND);
         }
     }
 
     @Override
-    public List<AnswerDto> findAllByUserAndQuiz(Long quizId, Long userId) throws AnswerServiceException {
+    public List<AnswerDto> findAllByUserAndQuiz(String quizId, String userId) throws AnswerServiceException {
         try {
-            return answerRepository.findAllByQuestionAndUser(quizId, userId);
+            List<Answer> answerList = answerRepository.findAnswersByUserAndQuestionQuiz(Long.parseLong(quizId), Long.parseLong(userId));
+            return modelMapper.map(answerList, new TypeToken<List<AnswerDto>>() {
+            }.getType());
         } catch (Exception e) {
+            logger.error(e.getMessage());
             throw new AnswerServiceException(e);
         }
     }

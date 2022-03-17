@@ -19,28 +19,24 @@ public class QuizController {
     private QuizService quizService;
 
     @PostMapping("/quiz")
-    //@JWTTokenNeeded
     public ResponseEntity<String> addQuiz(@RequestBody QuizDto quizDto) throws QuizServiceException {
         quizService.save(quizDto);
         return ResponseEntity.ok("Quiz saved");
     }
 
     @PutMapping("/quiz/{id}")
-    //@JWTTokenNeeded
     public ResponseEntity<String> changeQuiz(@RequestBody QuizDto quizDto, @PathVariable String id) throws QuizServiceException {
         quizService.change(quizDto, id);
         return ResponseEntity.ok("Quiz changed");
     }
 
     @DeleteMapping("/quiz/{id}")
-    //@JWTTokenNeeded
     public ResponseEntity<String> deleteQuiz(@PathVariable Long id) throws QuizServiceException {
         quizService.delete(id);
         return ResponseEntity.ok("Quiz deleted");
     }
 
     @GetMapping("/quiz/{status}")
-    //@JWTTokenNeeded
     public List<QuizDto> findQuizByStatus(@PathVariable boolean status) throws QuizServiceException {
         return quizService.findQuizByStatus(status);
     }

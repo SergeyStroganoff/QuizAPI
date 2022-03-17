@@ -91,4 +91,14 @@ public class QuestionServiceImpl implements QuestionService {
         }
     }
 
+    @Override
+    public QuestionDto findQuestion(Long id) throws QuestionServiceException {
+        Question question = questionRepository.getById(id);
+        if (question != null) {
+            return modelMapper.map(question, QuestionDto.class);
+        } else {
+            throw new QuestionServiceException(QUESTION_NOT_FOUND);
+        }
+    }
+
 }
