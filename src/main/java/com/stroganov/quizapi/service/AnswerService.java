@@ -8,7 +8,6 @@ import java.util.List;
 
 @Service
 public interface AnswerService {
-
     void save(AnswerDto answerDto) throws AnswerServiceException;
 
     void delete(Long answerId) throws AnswerServiceException;

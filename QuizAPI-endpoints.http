@@ -1,0 +1,35 @@
+###
+GET http://localhost:8080/api/answer
+
+###
+POST http://localhost:8080/api/answer
+
+###
+DELETE http://localhost:8080/api/answer/{{id}}
+
+###
+POST http://localhost:8080/api/question
+
+###
+GET http://localhost:8080/api/question/{{id}}
+
+###
+DELETE http://localhost:8080/api/question/{{id}}
+
+###
+POST http://localhost:8080/api/quiz
+
+###
+PUT http://localhost:8080/api/quiz/{{id}}
+
+###
+DELETE http://localhost:8080/api/quiz/{{id}}
+
+###
+GET http://localhost:8080/api/quiz/{{status}}
+
+###
+POST http://localhost:8080/api/quiztype
+
+###
+DELETE http://localhost:8080/api/quiztype/{{id}}

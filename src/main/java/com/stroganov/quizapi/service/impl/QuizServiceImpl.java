@@ -5,8 +5,7 @@ import com.stroganov.quizapi.models.dto.QuizDto;
 import com.stroganov.quizapi.models.entities.Quiz;
 import com.stroganov.quizapi.repository.QuizRepository;
 import com.stroganov.quizapi.service.QuizService;
-import lombok.RequiredArgsConstructor;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,19 +15,17 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
+@Log4j2
 public class QuizServiceImpl implements QuizService {
 
-    @Autowired
-    QuizRepository quizRepository;
-    Logger logger = Logger.getLogger(QuizServiceImpl.class);
+    private final QuizRepository quizRepository;
+    private final ModelMapper modelMapper;
 
-    public QuizServiceImpl(QuizRepository quizRepository) {
+    @Autowired
+    public QuizServiceImpl(QuizRepository quizRepository, ModelMapper modelMapper) {
         this.quizRepository = quizRepository;
+        this.modelMapper = modelMapper;
     }
-
-    @Autowired
-    ModelMapper modelMapper;
 
     @Override
     public void save(QuizDto quizDto) throws QuizServiceException {
@@ -36,7 +33,7 @@ public class QuizServiceImpl implements QuizService {
         try {
             quizRepository.save(quiz);
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            log.error(e.getMessage());
             throw new QuizServiceException(e.getMessage());
         }
     }
@@ -55,7 +52,7 @@ public class QuizServiceImpl implements QuizService {
                 quizRepository.save(quiz);
             }
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            log.error(e.getMessage());
             throw new QuizServiceException(e.getMessage());
         }
     }
@@ -65,7 +62,7 @@ public class QuizServiceImpl implements QuizService {
         try {
             quizRepository.deleteById(quizId);
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            log.error(e.getMessage());
             throw new QuizServiceException(e.getMessage());
         }
     }
@@ -77,9 +74,8 @@ public class QuizServiceImpl implements QuizService {
             return modelMapper.map(quizList, new TypeToken<List<QuizDto>>() {
             }.getType());
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            log.error(e.getMessage());
             throw new QuizServiceException(e.getMessage());
         }
     }
-
 }

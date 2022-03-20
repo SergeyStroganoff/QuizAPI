@@ -1,0 +1,147 @@
+openapi: "3.0.3"
+info:
+  title: "QuizAPI API"
+  description: "QuizAPI API"
+  version: "1.0.0"
+servers:
+  - url: "https://QuizAPI"
+paths:
+  /api/answer:
+    get:
+      summary: "GET api/answer"
+      operationId: "findAllUsersAnswer"
+      parameters:
+        - name: "quizId"
+          in: "query"
+          required: true
+          schema:
+            type: "string"
+        - name: "userId"
+          in: "query"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+    post:
+      summary: "POST api/answer"
+      operationId: "addQuestion"
+      responses:
+        "200":
+          description: "OK"
+  /api/answer/{id}:
+    delete:
+      summary: "DELETE api/answer/{id}"
+      operationId: "findAnswer"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "number"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+  /api/question:
+    post:
+      summary: "POST api/question"
+      operationId: "addQuestion"
+      responses:
+        "200":
+          description: "OK"
+  /api/question/{id}:
+    get:
+      summary: "GET api/question/{id}"
+      operationId: "findQuestion"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "number"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+    delete:
+      summary: "DELETE api/question/{id}"
+      operationId: "deleteQuestion"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "number"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+  /api/quiz:
+    post:
+      summary: "POST api/quiz"
+      operationId: "addQuiz"
+      responses:
+        "200":
+          description: "OK"
+  /api/quiz/{id}:
+    put:
+      summary: "PUT api/quiz/{id}"
+      operationId: "changeQuiz"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "OK"
+    delete:
+      summary: "DELETE api/quiz/{id}"
+      operationId: "deleteQuiz"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "number"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"
+  /api/quiz/{status}:
+    get:
+      summary: "GET api/quiz/{status}"
+      operationId: "findQuizByStatus"
+      parameters:
+        - name: "status"
+          in: "path"
+          required: true
+          schema:
+            type: "boolean"
+      responses:
+        "200":
+          description: "OK"
+  /api/quiztype:
+    post:
+      summary: "POST api/quiztype"
+      operationId: "addQuestionType"
+      responses:
+        "200":
+          description: "OK"
+  /api/quiztype/{id}:
+    delete:
+      summary: "DELETE api/quiztype/{id}"
+      operationId: "deleteQuestionType"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "number"
+            format: "int64"
+      responses:
+        "200":
+          description: "OK"

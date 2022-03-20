@@ -9,7 +9,7 @@ import com.stroganov.quizapi.models.entities.Quiz;
 import com.stroganov.quizapi.repository.QuestionRepository;
 import com.stroganov.quizapi.repository.QuizRepository;
 import com.stroganov.quizapi.service.QuestionService;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +19,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Log4j2
 public class QuestionServiceImpl implements QuestionService {
-
     public static final String QUESTION_NOT_FOUND = "Question not found";
-    @Autowired
-    ModelMapper modelMapper;
-    QuestionRepository questionRepository;
-    QuizRepository quizRepository;
-    Logger logger = Logger.getLogger(QuestionServiceImpl.class);
+    private final ModelMapper modelMapper;
+    private final QuestionRepository questionRepository;
+    private final QuizRepository quizRepository;
 
     @Autowired
-    public QuestionServiceImpl(QuestionRepository questionRepository, QuizRepository quizRepository) {
+    public QuestionServiceImpl(ModelMapper modelMapper, QuestionRepository questionRepository, QuizRepository quizRepository) {
+        this.modelMapper = modelMapper;
         this.questionRepository = questionRepository;
         this.quizRepository = quizRepository;
     }
@@ -40,7 +39,7 @@ public class QuestionServiceImpl implements QuestionService {
         try {
             questionRepository.save(question);
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            log.error(e.getMessage());
             throw new QuestionServiceException(e.getMessage());
         }
     }
@@ -58,7 +57,7 @@ public class QuestionServiceImpl implements QuestionService {
                 questionRepository.save(question);
             }
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            log.error(e.getMessage());
             throw new QuestionServiceException(e.getMessage());
         }
     }
@@ -73,7 +72,7 @@ public class QuestionServiceImpl implements QuestionService {
                 throw new QuestionServiceException(QUESTION_NOT_FOUND);
             }
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            log.error(e.getMessage());
             throw new QuestionServiceException(e.getMessage());
         }
     }
@@ -86,7 +85,7 @@ public class QuestionServiceImpl implements QuestionService {
             return modelMapper.map(questionList, new TypeToken<List<QuizDto>>() {
             }.getType());
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            log.error(e.getMessage());
             throw new QuestionServiceException(e.getMessage());
         }
     }
@@ -100,5 +99,4 @@ public class QuestionServiceImpl implements QuestionService {
             throw new QuestionServiceException(QUESTION_NOT_FOUND);
         }
     }
-
 }

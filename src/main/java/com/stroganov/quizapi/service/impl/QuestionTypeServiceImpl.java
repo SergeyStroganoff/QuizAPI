@@ -6,7 +6,7 @@ import com.stroganov.quizapi.models.entities.QuestionType;
 import com.stroganov.quizapi.repository.QuestionTypeRepository;
 import com.stroganov.quizapi.service.QuestionTypeService;
 import lombok.RequiredArgsConstructor;
-import org.apache.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,19 +14,17 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
+@Log4j2
 public class QuestionTypeServiceImpl implements QuestionTypeService {
 
     public static final String QUESTION_TYPE_WAS_NOT_FOUND = "QuestionType was not found";
-    QuestionTypeRepository questionTypeRepository;
-    Logger logger = Logger.getLogger(QuestionTypeServiceImpl.class);
+    private final QuestionTypeRepository questionTypeRepository;
+    private final ModelMapper modelMapper;
 
     @Autowired
-    ModelMapper modelMapper;
-
-    @Autowired
-    public QuestionTypeServiceImpl(QuestionTypeRepository questionTypeRepository) {
+    public QuestionTypeServiceImpl(QuestionTypeRepository questionTypeRepository, ModelMapper modelMapper) {
         this.questionTypeRepository = questionTypeRepository;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -35,7 +33,7 @@ public class QuestionTypeServiceImpl implements QuestionTypeService {
         try {
             questionTypeRepository.save(questionType);
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            log.error(e.getMessage());
             throw new QuestionTypeServiceException(e.getMessage());
         }
     }
@@ -47,7 +45,7 @@ public class QuestionTypeServiceImpl implements QuestionTypeService {
             try {
                 questionTypeRepository.delete(questionTypeOptional.get());
             } catch (Exception e) {
-                logger.error(e.getMessage());
+                log.error(e.getMessage());
                 throw new QuestionTypeServiceException(e.getMessage());
             }
         } else {
