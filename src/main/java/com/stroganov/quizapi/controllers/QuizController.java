@@ -15,8 +15,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class QuizController {
 
-    @Autowired
     private QuizService quizService;
+
+    @Autowired
+    public QuizController(QuizService quizService) {
+        this.quizService = quizService;
+    }
 
     @PostMapping("/quiz")  //creating new quiz
     public ResponseEntity<String> addQuiz(@RequestBody QuizDto quizDto) throws QuizServiceException {

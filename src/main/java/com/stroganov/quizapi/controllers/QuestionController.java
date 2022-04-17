@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class QuestionController {
 
+    private QuestionService questionService;
+
     @Autowired
-    QuestionService questionService;
+    public QuestionController(QuestionService questionService) {
+        this.questionService = questionService;
+    }
 
     @GetMapping("/question/{id}")
     public QuestionDto findQuestion(@PathVariable Long id) throws QuestionServiceException {

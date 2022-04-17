@@ -47,10 +47,11 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public void change(QuestionDto questionDto, String id) throws QuestionServiceException {
         try {
-            Question question = questionRepository.getById(Long.parseLong(id));
-            if (question == null) {
+            Optional<Question> questionOptional = questionRepository.findById(Long.parseLong(id));
+            if (questionOptional.isEmpty()) {
                 questionRepository.save(modelMapper.map(questionDto, Question.class));
             } else {
+                Question question = questionOptional.get();
                 question.setQuiz(modelMapper.map(questionDto.getQuiz(), Quiz.class));
                 question.setText(questionDto.getText());
                 question.setType(modelMapper.map(questionDto.getType(), QuestionType.class));

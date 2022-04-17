@@ -13,5 +13,4 @@ public interface AnswerService {
     void delete(Long answerId) throws AnswerServiceException;
 
     List<AnswerDto> findAllByUserAndQuiz(String quizId, String userId) throws AnswerServiceException;
-
 }

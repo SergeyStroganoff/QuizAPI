@@ -13,12 +13,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 
 public class QuestionDto implements Serializable {
-
-
     private QuestionTypeDto type;
-
     private QuizDto quiz;
-
     private String text;
 
 }

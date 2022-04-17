@@ -2,7 +2,6 @@ package com.stroganov.quizapi.repository;
 
 import com.stroganov.quizapi.models.entities.Quiz;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 

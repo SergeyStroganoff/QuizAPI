@@ -5,7 +5,6 @@ import com.stroganov.quizapi.models.dto.QuestionTypeDto;
 import com.stroganov.quizapi.models.entities.QuestionType;
 import com.stroganov.quizapi.repository.QuestionTypeRepository;
 import com.stroganov.quizapi.service.QuestionTypeService;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

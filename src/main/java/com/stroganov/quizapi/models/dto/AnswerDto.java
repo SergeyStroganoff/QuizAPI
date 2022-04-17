@@ -14,6 +14,5 @@ import java.io.Serializable;
 public class AnswerDto implements Serializable {
 
     private UserDto user;
-
     private QuestionDto question;
 }

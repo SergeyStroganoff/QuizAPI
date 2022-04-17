@@ -15,8 +15,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AnswerController {
 
+    private AnswerService answerService;
+
     @Autowired
-    AnswerService answerService;
+    public AnswerController(AnswerService answerService) {
+        this.answerService = answerService;
+    }
 
     @DeleteMapping("/answer/{id}")
     public ResponseEntity<String> findAnswer(@PathVariable Long id) throws AnswerServiceException {
@@ -31,8 +35,8 @@ public class AnswerController {
     }
 
     @GetMapping("/answer")  // gey list of answers by user id and quiz id
-    public List<AnswerDto> findAllUsersAnswer(@RequestParam String quizId,@RequestParam String userId ) throws AnswerServiceException {
-        return answerService.findAllByUserAndQuiz(quizId,userId);
+    public List<AnswerDto> findAllUsersAnswer(@RequestParam String quizId, @RequestParam String userId) throws AnswerServiceException {
+        return answerService.findAllByUserAndQuiz(quizId, userId);
 
     }
 }

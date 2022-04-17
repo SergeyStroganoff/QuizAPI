@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class QuestionTypeController {
 
-    @Autowired
     private QuestionTypeService questionTypeService;
+
+    @Autowired
+    public QuestionTypeController(QuestionTypeService questionTypeService) {
+        this.questionTypeService = questionTypeService;
+    }
 
     @PostMapping("/quiztype")
     public ResponseEntity<String> addQuestionType(@RequestBody QuestionTypeDto questionTypeDto) throws QuestionTypeServiceException {

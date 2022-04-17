@@ -17,10 +17,7 @@ import java.util.Date;
 public class QuizDto implements Serializable {
 
     private Date startDate;
-
     private Date endDate;
-
     private String description;
-
     private boolean status;
 }

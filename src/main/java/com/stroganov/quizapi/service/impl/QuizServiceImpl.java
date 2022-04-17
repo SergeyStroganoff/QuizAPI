@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Log4j2
@@ -45,11 +46,12 @@ public class QuizServiceImpl implements QuizService {
     @Override
     public void change(QuizDto quizDto, String id) throws QuizServiceException {
         try {
-            Quiz quiz = quizRepository.getById(Long.parseLong(id));
-            if (quiz == null) {
+            Optional<Quiz> quizOptional = quizRepository.findById(Long.parseLong(id));
+            if (quizOptional.isEmpty()) {
                 Quiz newQuiz = modelMapper.map(quizDto, Quiz.class);
                 quizRepository.save(newQuiz);
             } else {
+                Quiz quiz = quizOptional.get();
                 Date startDateQuiz = quiz.getStartDate();
                 quiz = modelMapper.map(quizDto, Quiz.class);
                 quiz.setStartDate(startDateQuiz);
@@ -85,13 +87,13 @@ public class QuizServiceImpl implements QuizService {
 
     @Override
     public List<QuizDto> findQuizByUserId(long userId) throws QuizServiceException {
-        User user = userRepository.getById(userId);
-        if (user == null) {
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (userOptional.isEmpty()) {
             String message = "No such user" + userId;
             log.info(message);
             throw new QuizServiceException(message);
         }
-        List<Quiz> quizList = user.getQuizLIst();
+        List<Quiz> quizList = userOptional.get().getQuizLIst();
         return modelMapper.map(quizList, new TypeToken<List<QuizDto>>() {
         }.getType());
     }

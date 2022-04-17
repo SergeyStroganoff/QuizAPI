@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Log4j2
@@ -33,16 +34,15 @@ public class AnswerServiceImpl implements AnswerService {
             answerRepository.save(answer);
         } catch (Exception e) {
             log.error(e.getMessage());
-
             throw new AnswerServiceException(e);
         }
     }
 
     @Override
     public void delete(Long answerId) throws AnswerServiceException {
-        Answer answer = answerRepository.getById(answerId);
-        if (answer != null) {
-            answerRepository.delete(answer);
+        Optional<Answer> answer = answerRepository.findById(answerId);
+        if (answer.isPresent()) {
+            answerRepository.delete(answer.get());
         } else {
             log.debug(ANSWER_WAS_NOT_FOUND + " " + answerId);
             throw new AnswerServiceException(ANSWER_WAS_NOT_FOUND);

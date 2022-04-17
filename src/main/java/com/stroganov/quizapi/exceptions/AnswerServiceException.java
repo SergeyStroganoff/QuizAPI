@@ -1,10 +1,11 @@
 package com.stroganov.quizapi.exceptions;
 
 public class AnswerServiceException extends Exception {
-    public AnswerServiceException(Exception e) {
+    public AnswerServiceException(String message) {
+        super(message);
     }
 
-    public AnswerServiceException(String message) {
-
+    public AnswerServiceException(Throwable cause) {
+        super(cause);
     }
 }
