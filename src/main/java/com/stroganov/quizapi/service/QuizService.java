@@ -15,4 +15,6 @@ public interface QuizService {
     void delete(Long quizId) throws QuizServiceException;
 
     List<QuizDto> findQuizByStatus(boolean status) throws QuizServiceException;
+
+    List<QuizDto> findQuizByUserId(long userId) throws QuizServiceException;
 }

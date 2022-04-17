@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,7 +23,7 @@ public class User {
     @Column(name = "alias")
     private String alias;
 
-    //  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    //  @JoinTable(name = "user_quiz", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "quiz_id"))
-    //  List<Quiz> quizLIst;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "user_quiz", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "quiz_id"))
+    private List<Quiz> quizLIst;
 }

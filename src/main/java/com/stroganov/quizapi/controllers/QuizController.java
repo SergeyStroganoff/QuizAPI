@@ -18,13 +18,13 @@ public class QuizController {
     @Autowired
     private QuizService quizService;
 
-    @PostMapping("/quiz")
+    @PostMapping("/quiz")  //creating new quiz
     public ResponseEntity<String> addQuiz(@RequestBody QuizDto quizDto) throws QuizServiceException {
         quizService.save(quizDto);
         return ResponseEntity.ok("Quiz saved");
     }
 
-    @PutMapping("/quiz/{id}")
+    @PutMapping("/quiz/{id}") // change new quiz
     public ResponseEntity<String> changeQuiz(@RequestBody QuizDto quizDto, @PathVariable String id) throws QuizServiceException {
         quizService.change(quizDto, id);
         return ResponseEntity.ok("Quiz changed");
@@ -36,8 +36,13 @@ public class QuizController {
         return ResponseEntity.ok("Quiz deleted");
     }
 
-    @GetMapping("/quiz/{status}")
+    @GetMapping("/quiz/{status}") //find quiz by status
     public List<QuizDto> findQuizByStatus(@PathVariable boolean status) throws QuizServiceException {
         return quizService.findQuizByStatus(status);
+    }
+
+    @GetMapping("/quiz/user/{userId}") //find quiz by status
+    public List<QuizDto> findQuizByUserId(@PathVariable long userId) throws QuizServiceException {
+        return quizService.findQuizByUserId(userId);
     }
 }

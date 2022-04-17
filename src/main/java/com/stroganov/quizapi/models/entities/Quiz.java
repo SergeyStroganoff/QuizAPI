@@ -34,4 +34,5 @@ public class Quiz implements Serializable {
 
     @Column(name = "status")
     private boolean status;
+
 }

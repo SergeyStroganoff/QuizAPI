@@ -25,12 +25,12 @@ public class AnswerController {
     }
 
     @PostMapping("/answer")
-    public ResponseEntity<String> addQuestion(@RequestBody AnswerDto answerDto) throws AnswerServiceException {
+    public ResponseEntity<String> addAnswer(@RequestBody AnswerDto answerDto) throws AnswerServiceException {
         answerService.save(answerDto);
         return ResponseEntity.ok("Question saved");
     }
 
-    @GetMapping("/answer")
+    @GetMapping("/answer")  // gey list of answers by user id and quiz id
     public List<AnswerDto> findAllUsersAnswer(@RequestParam String quizId,@RequestParam String userId ) throws AnswerServiceException {
         return answerService.findAllByUserAndQuiz(quizId,userId);
 

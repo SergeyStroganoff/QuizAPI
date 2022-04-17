@@ -15,7 +15,6 @@ public class AudienceValidator implements OAuth2TokenValidator<Jwt> {
     private final String audience;
 
     AudienceValidator(String audience) {
-       // Assert.hasText(audience, "audience is null or empty");
         this.audience = audience;
     }
 

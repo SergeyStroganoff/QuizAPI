@@ -3,7 +3,9 @@ package com.stroganov.quizapi.service.impl;
 import com.stroganov.quizapi.exceptions.QuizServiceException;
 import com.stroganov.quizapi.models.dto.QuizDto;
 import com.stroganov.quizapi.models.entities.Quiz;
+import com.stroganov.quizapi.models.entities.User;
 import com.stroganov.quizapi.repository.QuizRepository;
+import com.stroganov.quizapi.repository.UserRepository;
 import com.stroganov.quizapi.service.QuizService;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
@@ -19,11 +21,13 @@ import java.util.List;
 public class QuizServiceImpl implements QuizService {
 
     private final QuizRepository quizRepository;
+    private final UserRepository userRepository;
     private final ModelMapper modelMapper;
 
     @Autowired
-    public QuizServiceImpl(QuizRepository quizRepository, ModelMapper modelMapper) {
+    public QuizServiceImpl(QuizRepository quizRepository, UserRepository userRepository, ModelMapper modelMapper) {
         this.quizRepository = quizRepository;
+        this.userRepository = userRepository;
         this.modelMapper = modelMapper;
     }
 
@@ -77,5 +81,18 @@ public class QuizServiceImpl implements QuizService {
             log.error(e.getMessage());
             throw new QuizServiceException(e.getMessage());
         }
+    }
+
+    @Override
+    public List<QuizDto> findQuizByUserId(long userId) throws QuizServiceException {
+        User user = userRepository.getById(userId);
+        if (user == null) {
+            String message = "No such user" + userId;
+            log.info(message);
+            throw new QuizServiceException(message);
+        }
+        List<Quiz> quizList = user.getQuizLIst();
+        return modelMapper.map(quizList, new TypeToken<List<QuizDto>>() {
+        }.getType());
     }
 }
