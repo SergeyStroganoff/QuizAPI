@@ -1,11 +1,11 @@
 package com.stroganov.quizapi.models.entities;
 
-import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Getter
@@ -13,7 +13,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = ("qustion_type"))
+@Table(name = ("question_type"))
 public class QuestionType implements Serializable {
 
     @Id
